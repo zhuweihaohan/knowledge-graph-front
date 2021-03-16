@@ -1,25 +1,15 @@
-import VueRouter from "vue-router";
-// import HelloWorld from "@/components/HelloWorld.vue";
-// import Me from "@/components/Me.vue";
+import Vue from 'vue'
+import Router from 'vue-router'
+import HelloWorld from '@/components/HelloWorld'
 
-// 路由懒加载, 得结合 babel-plugin-syntax-dynamic-import 插件使用
-const HelloWorld = () => import("@/components/HelloWorld.vue");
-const Me = () => import("@/components/Me.vue");
+Vue.use(Router)
 
-const router = new VueRouter({
+export default new Router({
   routes: [
-    { path: "/", redirect: { name: "introduce" } },
     {
-      path: "/introduce",
-      name: "introduce",
+      path: '/',
+      name: 'HelloWorld',
       component: HelloWorld
-    },
-    {
-      path: "/me",
-      name: "me",
-      component: Me
     }
   ]
-});
-
-export default router;
+})
