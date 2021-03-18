@@ -2,7 +2,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 导入组件
-import Login from '../views/Login'
 import NotFound from '../views/NotFound'
 import index from "../views/index"
 // 使用
@@ -19,12 +18,6 @@ const router=new VueRouter({
     {
       path: '/index',
       component: index
-
-    },
-    // 登录页
-    {
-      path: '/login',
-      component: Login
 
     },
     {
