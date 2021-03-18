@@ -1,11 +1,13 @@
 <template>
-  <div class="view-content">
-    <div style="margin-top: 15px;text-align: center">
+  <div class="view-content" v-loading="loading" element-loading-text="拼命加载中"
+       element-loading-spinner="el-icon-loading"
+       element-loading-background="rgba(0, 0, 0, 0.8)">
+    <div style="margin-top: 0px;text-align: center">
       <el-input placeholder="请输入内容" v-model="entity" style="width: 80vh;">
         <el-button slot="append" icon="el-icon-search" @click="find()"></el-button>
       </el-input>
     </div>
-    <div style="width:auto;height:100vh;" ref="chart"></div>
+    <div style="width:auto;height:96vh;" ref="chart"  ></div>
   </div>
 </template>
 
@@ -15,6 +17,7 @@ export default {
   name: "index",
   data(){
     return{
+      loading:true,
       node:[],
       link:[],
       categories:[{
@@ -33,11 +36,13 @@ export default {
     console.log('进入路由之前')
     // 进入路由之前执行getData
     next(vm => {
+
       vm.getData()
     })
   },
   methods: {
     find(){
+      this.loading=true
       this.axios({
         method: 'post',
         url: '/api/index/find',
@@ -100,10 +105,11 @@ export default {
             type: 'error'
           });
         }
+        this.loading=false
       })
     },
     getData(){
-
+   this.loading=true
       this.axios({
         method: 'post',
         url: '/api/index/find',
@@ -163,6 +169,7 @@ console.log(res.data)
             message: '无此信息',
             type: 'error'
           })}
+        this.loading=false
       })
     },
     drawLine() {
