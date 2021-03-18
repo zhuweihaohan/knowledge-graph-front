@@ -1,6 +1,6 @@
 # sport-manage-vue
 
-> A Vue.js project
+一个vue+echarts实现的知识图谱展示，数据源来自思知公司的开放api
 
 ## Build Setup
 
