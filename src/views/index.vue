@@ -21,9 +21,9 @@ export default {
         "name": "主体"
       },
         {
-          "name": "关系"
+          "name": "属性"
         }],
-      entity:"刘德华"
+      entity:"胡歌"
     }
   },
   mounted() {
@@ -52,19 +52,20 @@ export default {
         myChart.setOption({
           tooltip:{
             trigger : 'item',
+
             formatter : function(params) {
               //我这里用不到返回值，因此只有params一个参数
               //params的含义看后文的说明。
               //attribute是我给关系边自定义的一个参数
               //所以params.data.name只有在关系边里才存在
-              if (params.data.name) {
+              if (params.data.value) {
                 //如果这个数据有name参数，那么返回name参数的内容
                 //这个内容就是提示时显示的内容。
-                return params.data.name;
+                return params.data.value;
               } else {
                 //否则显示name参数的内容。
                 //在关系图里，能进到这里的数据项，应该只有节点和关系两种，所以不是关系就只能是节点……
-                return params.name;
+                return params.data.name;
               }
             }},
           legend: [{
@@ -122,16 +123,16 @@ console.log(res.data)
                   //params的含义看后文的说明。
                   //attribute是我给关系边自定义的一个参数
                   //所以params.data.name只有在关系边里才存在
-                  if (params.data.name) {
+                  if (params.data.value) {
                     //如果这个数据有name参数，那么返回name参数的内容
                     //这个内容就是提示时显示的内容。
-                    return params.data.name;
+                    return params.data.value;
                   } else {
                     //否则显示name参数的内容。
                     //在关系图里，能进到这里的数据项，应该只有节点和关系两种，所以不是关系就只能是节点……
-                    return params.name;
+                    return params.data.name;
                   }
-              }},
+                }},
               legend: [{
                 // selectedMode: 'single',
                 data: this.categories.map(function (a) {
@@ -174,7 +175,17 @@ console.log(res.data)
           top: 'bottom',
           left: 'right'
         },
-        tooltip: {},
+        tooltip: {
+          trigger: 'axis',
+          confine: true,
+          // 分别设置四个方向的内边距
+          padding: [
+            10,  // 上
+            30, // 右
+            10,  // 下
+            30, // 左
+          ],
+        },
         legend: [{
           // selectedMode: 'single',
           // data: [].categories.map(function (a) {
